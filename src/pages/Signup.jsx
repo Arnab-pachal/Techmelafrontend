@@ -39,7 +39,7 @@ const Signup = ()=>{
                   <MessageSquare className="size-6 text-primary" />
                 </div>
                 <h1 className="text-2xl font-bold mt-2">Create Account</h1>
-                <p className="text-base-content/60">Please signup And wish Ayantika</p>
+                <p className="text-base-content/60">Please signup And register for Techmela</p>
               </div>
             </div>
   
