@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useauthStore } from "../store/useAuthStore";
 import { Camera, User } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const ProfilePage = () => {
-  const { authUser, isUpdatingProfile, updateProfile ,updateName} = useauthStore();
+  const { authUser, isUpdatingProfile, updateProfile ,updateName,updateTeam} = useauthStore();
   const [selectedImg, setSelectedImg] = useState(null);
   let name = authUser?.fullName;
   if(!name){name =""}
@@ -36,6 +37,9 @@ const submitname=async()=>{
     await updateName({name : text,id:authUser._id});
   }
  
+}
+const handleforward = async()=>{
+
 }
   return (
     <div className="h-screen pt-20">
@@ -83,8 +87,10 @@ const submitname=async()=>{
 
           <div className="space-y-6">
             <div className="space-y-1.5" onClick={change}>
+              <div>Change Your Name</div>
               <div className="text-sm text-zinc-400 flex items-center gap-2" >
                 <User className="w-4 h-4" />
+                
                 <input type="text" className="px-4 py-2.5 bg-base-200 rounded-lg border" onChange={namechange} ></input>
                 <button className="btn btn-outline btn-secondary" onClick={submitname}>Submit</button>
               </div>
@@ -96,6 +102,10 @@ const submitname=async()=>{
           <div className="mt-6 bg-base-300 rounded-xl p-6">
             <h2 className="text-lg font-medium  mb-4">Account Information</h2>
             <div className="space-y-3 text-sm">
+            <div className="flex items-center justify-between py-2 border-b border-zinc-700">
+                <span>UserName</span>
+                <span>{authUser.fullName}</span>
+              </div>
               <div className="flex items-center justify-between py-2 border-b border-zinc-700">
                 <span>Member Since</span>
                 <span>{authUser.createdAt?.split("T")[0]}</span>
@@ -104,6 +114,16 @@ const submitname=async()=>{
                 <span>Account Status</span>
                 <span className="text-green-500">Active</span>
               </div>
+              <Link to="/team" className=" link-primary">
+              <div className="flex items-center justify-between py-2 border-b border-zinc-700" onClick={handleforward}>
+                <span>Team Name</span>
+                <span>{authUser.TeamName?authUser.TeamName:"No team finalised"}</span>
+              </div>
+              </Link>
+              
+              
+          
+              
             </div>
           </div>
         </div>

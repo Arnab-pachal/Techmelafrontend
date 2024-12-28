@@ -22,30 +22,40 @@ const Navbar = () => {
             </Link>
           </div>
            
-          <Link
+           <span style={{marginTop:'10px'}}>
+           
+           <Link
               to={"/announce"}
               className={`
               btn btn-sm gap-2 transition-colors`}
-            >
+            > 
               <img src="https://res.cloudinary.com/dfdvyif4v/image/upload/v1734965874/announcement_imdv4i.png" 
               style={{height:'30px' ,width:'30px',borderRadius:'50%'}}/>
             </Link>
-     
+            <div>Announce</div>
+           </span>
+       
+            <span style={{marginTop:'10px'}}>
             <Link
               to={"/settings"}
               className={`
               btn btn-sm gap-2 transition-colors`}
             >
               <Settings className="w-4 h-4" />
-              <span className="hidden sm:inline">Settings</span>
             </Link>
+            <div>Settings</div>
+            </span>
+          
 
             {authUser && (
-              <>
-                <Link to={"/profile"} className={`btn btn-sm gap-2`}>
+              <> <span style={{marginTop:'10px'}}>
+                  <Link to={"/profile"} className={`btn btn-sm gap-2`}>
                   <User className="size-5" />
                   <span className="hidden sm:inline">Profile</span>
                 </Link>
+                <div>Profile</div>
+              </span>
+              
 
                 <button className="flex gap-2 items-center" onClick={logout}>
                   <LogOut className="size-5" />

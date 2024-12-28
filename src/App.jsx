@@ -12,6 +12,7 @@ import { useThemeStore } from './store/useThemeStore.js'
 import ChatContainer from './components/ChatContainer.jsx'
 import {Loader} from "lucide-react"
 import Messageview from "./pages/Messageview.jsx"
+import Team from "./pages/createTeam.jsx"
 
 function App() {
  const {authUser,checkAuth,ischeckingAuth,onlineUsers}=useauthStore();
@@ -40,6 +41,7 @@ function App() {
               <Route path='/profile' element={authUser?<Profile/>:<Navigate to='/login'/>}/>
               <Route path='/announce'element={<Announcement/>}/>
               <Route path='/msgview' element={authUser?<Messageview/>:<Navigate to='/login'/>}/>
+              <Route path='/team' element={authUser?<Team/>:<Navigate to='/login'/>}/>
               
             </Routes>
      

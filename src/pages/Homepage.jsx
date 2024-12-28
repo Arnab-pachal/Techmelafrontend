@@ -30,6 +30,9 @@ const HomePage = () => {
           <Link to="https://unstop.com/internships/full-stack-developer-internship-extion-infotech-1146627" className="link link-primary">
           <button class="btn btn-accent btn-outline">Register Here</button>
           </Link>
+          <Link to="/team" className="link link-primary" style={{marginLeft:'10px'}} >
+          <button class="btn btn-accent btn-outline">AllTeam</button>
+          </Link>
           </div>
           <div className="flex h-full rounded-lg overflow-hidden">
           </div>

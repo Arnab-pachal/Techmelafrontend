@@ -11,6 +11,10 @@ export const useauthStore=create((set,get)=>({
     onlineUsers: [],
     socket: null,
     ischeckingAuth:true,
+    team:[],
+    updateTeam: async(res)=>{
+         set({team:[...res]})
+    },
     checkAuth : async()=>{
         try{
          const res = await axiosInstance.get("/auth/check");
