@@ -2,7 +2,8 @@ import {create} from "zustand"
 import { axiosInstance } from "../lib/axios"
 import io from "socket.io-client"
 
-const url = "https://techmelabackend.onrender.com"
+
+const url = "http://localhost:3000"
 export const useauthStore=create((set,get)=>({
     authUser:null,
     isSigningUp:false,
@@ -12,6 +13,26 @@ export const useauthStore=create((set,get)=>({
     socket: null,
     ischeckingAuth:true,
     team:[],
+    forgot: async(email)=>{
+      let res = await axiosInstance.post("/auth/send-otp",email)
+      if(res.status==200){return true;}
+      else{return false;}
+  
+    },
+    verify : async(data)=>{
+      console.log(data)
+      let res = await axiosInstance.post("/auth/verify-otp",data)
+      console.log(res.data)
+      if(res.status==200){return true;}
+      else{return false;}
+  
+    },
+    updateInfo : async(data)=>{
+    console.log(data);
+    let res = await axiosInstance.post("/auth/forgotpass",data);
+    console.log(res.data);
+    return res;
+    },
     updateTeam: async(res)=>{
          set({team:[...res]})
     },
@@ -89,7 +110,7 @@ export const useauthStore=create((set,get)=>({
    try{
     const res = await axiosInstance.put("/auth/updateName",data);
     set({authUser:res.data});
-    alert("Name Changed successfully")
+    alert("Name And Password Changed successfully")
    }
    catch(error){console.log("error in updateName profile:", error);
     alert(error.response.data.message);}

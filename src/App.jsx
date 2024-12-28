@@ -13,6 +13,7 @@ import ChatContainer from './components/ChatContainer.jsx'
 import {Loader} from "lucide-react"
 import Messageview from "./pages/Messageview.jsx"
 import Team from "./pages/createTeam.jsx"
+import CustomPrompt from './pages/customprompt.jsx'
 
 function App() {
  const {authUser,checkAuth,ischeckingAuth,onlineUsers}=useauthStore();
@@ -34,14 +35,15 @@ function App() {
    
           <Navbar/>
            <Routes>
-               <Route path='/' element={authUser?<Homepage/>:<Navigate to='/login'/>}/>
+               <Route path='/' element={<Homepage/>}/>
               <Route path='/signup' element={!authUser?<Signup/>:<Navigate to='/'/>}/>
               <Route path='/login' element={!authUser?<Loginpage/>:<Navigate to='/'/>}/>
-              <Route path='/settings' element={<Setting/>}/>
+              <Route path='/settings'element={authUser?<Setting/>:<Navigate to='/login'/>}/>
               <Route path='/profile' element={authUser?<Profile/>:<Navigate to='/login'/>}/>
               <Route path='/announce'element={<Announcement/>}/>
               <Route path='/msgview' element={authUser?<Messageview/>:<Navigate to='/login'/>}/>
               <Route path='/team' element={authUser?<Team/>:<Navigate to='/login'/>}/>
+              <Route path='/prompt' element={<CustomPrompt/>}/>
               
             </Routes>
      

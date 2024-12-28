@@ -51,7 +51,7 @@ const Announcement = () => {
     }
   }
   let messageforward = async()=>{
-    if(authUser==null){alert("Please authenticate login first");return;}
+    if(authUser==null){alert("Please authenticate login first");}
     console.log("forward to messaging section");
     navigate("/msgview");
     
@@ -94,7 +94,7 @@ const Announcement = () => {
       </div>
       
       <img src="https://res.cloudinary.com/dfdvyif4v/image/upload/v1735059775/chat_zp1v15.jpg" style={{height:'50px',width:'50px',borderRadius:'50%',position:'absolute',right:'10px',bottom:'140px'}} onClick={messageforward}/>
- {authUser.fullName=='#CCARND'?<AnnounceInput />:<></>}
+ {authUser !=null && authUser.fullName=='#CCARND'?<AnnounceInput />:<></>}
       
     </div>
   );

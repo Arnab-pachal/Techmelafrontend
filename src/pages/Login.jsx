@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { useauthStore } from "../store/useAuthStore";
 import AuthImagePattern from "../components/Authimagepattern";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare,User } from "lucide-react";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+    const [inputValue, setInputValue] = useState("");
+    const navigate =  useNavigate();
+  
   const [formData, setFormData] = useState({
     fullName: "",
     password: "",
@@ -16,7 +20,9 @@ const LoginPage = () => {
     e.preventDefault();
     login(formData);
   };
-
+ let handleclick = async()=>{
+  navigate("/prompt");
+ }
   return (
     <div className="h-screen grid lg:grid-cols-2">
       {/* Left Side - Form */}
@@ -104,6 +110,15 @@ const LoginPage = () => {
                 Create account
               </Link>
             </p>
+          </div>
+          
+          <div className="text-center">
+      
+            <button className="text-base-content/60" onClick={handleclick}>
+              Forgot Password?{" "}
+              </button>
+             
+            
           </div>
         </div>
       </div>

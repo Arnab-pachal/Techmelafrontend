@@ -7,11 +7,13 @@ const Signup = ()=>{
     const [formdata,setFormdata]=useState({
         fullName:"",
         password:"",
+        email:"",
     });
   
     const {signup,isSigningup}=useauthStore();
     const validateForm =()=>{
       console.log(formdata.fullName.trim().length)
+      if(formdata.email.trim().length===0){alert('Please Provide Email');return false;}
       if(formdata.fullName.trim().length===0){ alert('Please Provide Name'); return false;}
       if(formdata.password.trim().length==0){alert('Please Provide password');return false;}
       return true;
@@ -58,6 +60,23 @@ const Signup = ()=>{
                     placeholder="John Doe"
                     value={formdata.fullName}
                     onChange={(e) => setFormdata({ ...formdata, fullName: e.target.value })}
+                  />
+                </div>
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium">Email</span>
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Mail className="size-5 text-base-content/40" />
+                  </div>
+                  <input
+                    type="email"
+                    className={`input input-bordered w-full pl-10`}
+                    placeholder="@gmail.com"
+                    value={formdata.email}
+                    onChange={(e) => setFormdata({ ...formdata, email: e.target.value })}
                   />
                 </div>
               </div>

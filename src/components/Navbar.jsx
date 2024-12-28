@@ -15,8 +15,8 @@ const Navbar = () => {
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center gap-2.5 hover:opacity-80 transition-all">
               <div className="size-9 rounded-lg bg-primary/10 flex items-center justify-center">
-                <img src="https://res.cloudinary.com/dfdvyif4v/image/upload/v1734971530/nw2wndhwg2ado6yt9p8u.png"
-                 style={{height:'50px',width:'50px',borderRadius:'50%'}}/>
+                <img src="https://res.cloudinary.com/dfdvyif4v/image/upload/v1734944224/rnd_gbkzfp.png"
+                 style={{height:'60px',width:'60px',borderRadius:'10%'}}/>
               </div>
              
             </Link>
