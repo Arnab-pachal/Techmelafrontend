@@ -86,7 +86,7 @@ export const useauthStore=create((set,get)=>({
             alert("Logged-in Successfully");
          }
          catch(error){
-          alert(error.response.data.message);
+          alert(error);
          }
          finally{
             set({isLoggingIng:false})

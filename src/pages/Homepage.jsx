@@ -39,7 +39,7 @@ const HomePage = () => {
               
                 A Team Consist Of Maximum 5 members.
                 All Members Should have to signup with Username and Password .
-                Login and Go Profile Section and press register button and register at UnStop.
+                Login and Go Profile Section For Showing Shortlisted Teams .In Home Page press register button and register at UNSTOP.
                 After Shortlisting the Team will be finalised .
               
                 <b style={{marginTop:'15px'}}>For More Informations Refer to Announcement And Messaging Section or Contact :- +9187858229</b>
@@ -54,9 +54,16 @@ const HomePage = () => {
               <img src="https://res.cloudinary.com/dfdvyif4v/image/upload/v1735380815/conjecture_bonrgx.jpg" style={{height:'200px',width:'400px'}}></img>
               </div>
               <div className="flex flex-col h-full p-4" style={{justifyContent:"center",alignItems:'center'}}>
-              
+              <Link
+                  to="https://unstop.com/internships/full-stack-developer-internship-extion-infotech-1146627"
+                  className="link link-primary"
+                >
+                  <button className="btn btn-accent btn-outline">
+                    Register Here
+                  </button>
+                </Link>
               </div>
-           
+              
           </div>
         </div>
       </div>

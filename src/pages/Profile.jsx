@@ -39,14 +39,7 @@ const ProfilePage = () => {
               </Link>
               {authUser && (
               <div className="flex h-full rounded-lg overflow-hidden pb-8">
-                <Link
-                  to="https://unstop.com/internships/full-stack-developer-internship-extion-infotech-1146627"
-                  className="link link-primary"
-                >
-                  <button className="btn btn-accent btn-outline">
-                    Register Here
-                  </button>
-                </Link>
+                
                 <Link
                   to="/team"
                   className="link link-primary"
