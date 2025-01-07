@@ -22,7 +22,9 @@ const Signup = ()=>{
     const handleSubmit=(e)=>{
         e.preventDefault();
         const success = validateForm();
-        if(success==true){signup(formdata);}
+        if(success==true){signup(formdata);
+          
+        }
         else{toast.error("Please Give Valid FullName")}
 
     }

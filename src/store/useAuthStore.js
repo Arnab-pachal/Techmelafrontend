@@ -110,7 +110,7 @@ export const useauthStore=create((set,get)=>({
    try{
     const res = await axiosInstance.put("/auth/updateName",data);
     set({authUser:res.data});
-    alert("Name And Password Changed successfully")
+    alert("Name Changed successfully")
    }
    catch(error){console.log("error in updateName profile:", error);
     alert(error.response.data.message);}

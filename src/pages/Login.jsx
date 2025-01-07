@@ -6,7 +6,7 @@ import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare,User } from "lucide-rea
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-
+  const [id,setId]=useState("");
     const navigate =  useNavigate();
   
   const [formData, setFormData] = useState({
@@ -21,6 +21,10 @@ const LoginPage = () => {
   };
  let handleclick = async()=>{
   navigate("/prompt");
+ }
+ let handleChange = async(e)=>{
+  setId(e.target.value);
+  
  }
   return (
     <div className="h-screen grid lg:grid-cols-2">
@@ -101,7 +105,17 @@ const LoginPage = () => {
               )}
             </button>
           </form>
-        
+          <label>Admin Id For creating new Account</label>
+          <input type="text" onChange={handleChange} placeholder="Type Admin Id "></input>
+           {id=='#CCARND' && (   <div className="text-center">
+            <p className="text-base-content/60">
+              Don&apos;t have an account?{" "}
+              <Link to="/signup" className="link link-primary">
+                Create account
+              </Link>
+            </p>
+          </div>)}
+       
           
           <div className="text-center">
       

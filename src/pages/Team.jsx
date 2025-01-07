@@ -12,7 +12,7 @@ const Team = ({ t }) => {
   }, [t.teamName, getTeamparticipants]);
 
   const members = teamParticipants[t.teamName] || []; // Fallback to an empty array if undefined
-
+  console.log(`members of the team ${t.teamName} is:- ${members.profilePic}`)
   return (
     <div className="card w-auto bg-base-100 shadow-xl" style={{ border: "2px solid black", margin: "20px" }}>
       {/* Team Image */}

@@ -14,7 +14,6 @@ const Announcement = () => {
     deleteAnnounce,
     getAnnounce,
     isMessagesLoading,
-    saveAnnounce,
     visible
   } = useAnnounce();
   const { authUser } = useauthStore();
@@ -65,14 +64,12 @@ const Announcement = () => {
         messages.map((message) => (
           <div
             key={message._id}
-            className={`chat flex justify-center items-center text-center`}
-            ref={messageEndRef}
-            
-          >
+            className={`chat flex flex-col justify-center items-center text-center`}
+            ref={messageEndRef}>
            
             <div className="chat-header mb-1">
               <time className="text-xs opacity-50 ml-1">
-                {formatMessageTime(message.createdAt)}
+                {message.createdAt.substring(0,10)}
               </time>
             </div>
             <div className="chat-bubble flex flex-col" onClick={()=>{askmessage(message._id)}}>
@@ -94,7 +91,7 @@ const Announcement = () => {
       </div>
       
       <img src="https://res.cloudinary.com/dfdvyif4v/image/upload/v1735059775/chat_zp1v15.jpg" style={{height:'50px',width:'50px',borderRadius:'50%',position:'absolute',right:'10px',bottom:'140px'}} onClick={messageforward}/>
- {authUser !=null && authUser.fullName=='#CCARND'?<AnnounceInput />:<></>}
+ {authUser !=null && authUser.isHost?<AnnounceInput />:<></>}
       
     </div>
   );

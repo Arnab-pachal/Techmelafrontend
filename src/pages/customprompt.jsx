@@ -10,7 +10,6 @@ const CustomPrompt = (val) => {
  const [gmail,setGmail]=useState("");
   const [result, setResult] = useState(false);
   const [change,setChange]=useState(false);
-  const [resultuser,setResultuser]=useState("");
   const [resultpass,setResultpass]=useState("");
 
   const handleSubmit = async() => {
@@ -30,9 +29,14 @@ const CustomPrompt = (val) => {
     }
    }
    const handleSubmit2 = async()=>{
-      let result = await updateInfo({email:gmail,userName:resultuser,password:resultpass});
-      alert(result.data);
+      let result = await updateInfo({email:gmail,password:resultpass});
+      try{
+      alert("Password Changed And New Password Send To Your gmail");
       if(result.status==200){ navigate("/login");}
+      }
+      catch(e){
+        console.log(e);
+      }
      
    }
 
@@ -60,12 +64,7 @@ const CustomPrompt = (val) => {
           
         </div>}
         {change && <div style={{ border: "1px solid black", padding: "20px", width: "300px" }} >
-          <p>Type Your Newusername</p>
-          <input
-            type="text"
-            value={resultuser}
-            onChange={(e) => setResultuser(e.target.value)}
-          />
+         
           <p>Type Your New Password</p>
           <input
             type="password"

@@ -46,6 +46,7 @@ export const useTeam=create((set,get)=>({
     },
     createTeam : async(teamInfo)=>{
       try{
+        console.log(teamInfo)
       const {team} = get();
       console.log("The team info is :-\n",teamInfo);
       const res =await axiosInstance.post("/team/createteam",teamInfo);

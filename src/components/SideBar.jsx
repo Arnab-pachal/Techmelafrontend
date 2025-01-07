@@ -5,14 +5,18 @@ import SidebarSkeleton from "./skeletons/SidebarSkeleton";
 import { Users } from "lucide-react";
 import ChatContainer from "./ChatContainer";
 
-const SideBar = ({ id, isHost }) => {  // Destructure `id` and `isHost`
+const SideBar = () => {  // Destructure `id` and `isHost`
   const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } = useChatStore();
-  const { onlineUsers } = useauthStore();
+  const { onlineUsers ,authUser} = useauthStore();
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
-
+  const [isHost,setIsHost]=useState(authUser && authUser.isHost);
+ 
+  useEffect(()=>{
+    setIsHost()
+  })
   useEffect(() => {
     getUsers();
-  }, [getUsers]);
+  },[]);
 
   // Filter users based on online status
   const filteredUsers = showOnlineOnly
@@ -21,20 +25,21 @@ const SideBar = ({ id, isHost }) => {  // Destructure `id` and `isHost`
 
   // Select user based on ID passed
   useEffect(() => {
-    if (id!="") {
-      const user = users.find((user) => user._id === id);
-      if (user) {
+    let user;
+     if(authUser.isHost){user=users;}
+     else{ user = users.find((user) => user.isHost ==true);}
+        if (user) {
         setSelectedUser(user);
       }
-    }
-  }, [id, users, setSelectedUser]);
+  
+  }, [ users, setSelectedUser]);
 
   if (isUsersLoading) return <SidebarSkeleton />;
 
   // Determine which users can be displayed
-  const availableUsers = isHost
+  const availableUsers = authUser.isHost
     ? filteredUsers  // Host can see all users
-    : filteredUsers.filter(user => user._id === id);  // Participant can only see the host
+    : filteredUsers.filter(user => user.isHost);  // Participant can only see the host
 
   return (
     <aside className="h-full w-20 lg:w-72 border-r border-base-300 flex flex-col transition-all duration-200">

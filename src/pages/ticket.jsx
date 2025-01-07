@@ -6,6 +6,7 @@ import {useTeam} from "../store/useTeam"
 const TicketGenerator = () => {
   const {TicketSubmission}=useTeam();
   const [ticketDetails, setTicketDetails] = useState({
+    name:"",
     teamName: "",
     time: "",
     ticketName: "",
@@ -46,14 +47,14 @@ const TicketGenerator = () => {
       if (!ticketNode) {
         throw new Error("Ticket preview element not found.");
       }
-    let data = `${ticketDetails.bookingID.trim()}|${ticketDetails.teamName.trim()}|techmela-2025`
+    let data = `${ticketDetails.bookingID.trim()}|${ticketDetails.teamName.trim()}|${ticketDetails.name}|techmela-2025`
       const qrCodeImage = await QRCode.toDataURL(data);
       console.log(qrCodeImage)
       const ticketContent = ticketNode.innerText;
      
       if (!ticketContent) {
         throw new Error("Ticket content is empty.");
-      }
+      } 
   
       const pdfDoc = await PDFDocument.create();
       const page = pdfDoc.addPage([600,400]);

@@ -3,21 +3,20 @@ import { useThemeStore } from "../store/useThemeStore";
 import { useauthStore } from "../store/useAuthStore";
 import { useState } from "react";
 import { Camera, User } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 
 
 
 const Setting = () => {
+  const navigate = useNavigate();
   const { theme, setTheme } = useThemeStore();
   const { authUser, isUpdatingProfile, updateProfile ,updateName,updateTeam} = useauthStore();
     const [selectedImg, setSelectedImg] = useState(null);
     let name = authUser?.fullName;
-    let passw = authUser?.password;
     if(!name){name =""}
     const [text,setText]=useState(name)
-    const [pass,setPass]=useState(passw)
-  
+ 
     const handleImageUpload = async (e) => {
       const file = e.target.files[0];
       if (!file) return;
@@ -39,16 +38,16 @@ const Setting = () => {
     setText(e.target.value);
     
   }
-  const passChange = (e)=>{
-    setPass(e.target.value);
-  }
   const submitname=async()=>{
     if(authUser.fullName && text==authUser.fullName){alert("This Name is Already Saved");return;}
     if(text.trim().length==0){alert("A Name Can't Be Empty");}
     else{
-      await updateName({name : text,password : pass,id:authUser._id});
+      await updateName({name : text,id:authUser._id});
     }
    
+  }
+  let handleClick=async()=>{
+    navigate("/prompt")
   }
 let formstyle = {
 display:'flex',alignItems:'center',justifyContent:'center',marginTop:'10px',marginBottom:'10px'
@@ -129,8 +128,7 @@ display:'flex',alignItems:'center',justifyContent:'center',marginTop:'10px',marg
               <input type="text" className="px-4 py-2.5 bg-base-200 rounded-lg border" onChange={namechange} ></input>
               </div>
               <div style={formstyle}>
-              <label style={{marginRight:'10px'}}>Change <br></br>Password</label>
-              <input type="password" className="px-3 py-2.5 bg-base-200 rounded-lg border" onChange={passChange} />
+              <button className="btn btn-outline btn-secondary" onClick={handleClick}>Change Password</button>
               </div>
               <div style={formstyle} className="py-2">
               <button className="btn btn-outline btn-secondary" onClick={submitname}>Submit</button>

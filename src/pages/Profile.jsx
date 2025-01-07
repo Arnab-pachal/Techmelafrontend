@@ -4,7 +4,7 @@ import { Camera, User } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const ProfilePage = () => {
-  const { authUser, isUpdatingProfile, updateProfile ,updateName,updateTeam} = useauthStore();
+  const { authUser} = useauthStore();
   return (
     <div className="h-screen pt-20">
       <div className="max-w-2xl mx-auto p-4 py-8">
@@ -37,7 +37,7 @@ const ProfilePage = () => {
                 <span>{authUser.TeamName?authUser.TeamName:"No team finalised"}</span>
               </div>
               </Link>
-              {authUser && (
+              {authUser && authUser.isHost && (
               <div className="flex h-full rounded-lg overflow-hidden pb-8">
                 
                 <Link
@@ -50,7 +50,7 @@ const ProfilePage = () => {
               </div>
               
             )}
-             {authUser && (
+            {authUser && authUser.isHost && (
               <div className="flex h-full rounded-lg overflow-hidden pb-8">
                 
                 <Link
@@ -59,6 +59,32 @@ const ProfilePage = () => {
                   style={{ marginLeft: "10px" }}
                 >
                   <button className="btn btn-accent btn-outline">Generate Ticket</button>
+                </Link>
+              </div>
+              
+            )}
+             {authUser && !authUser.isHost && (
+              <div className="flex h-full rounded-lg overflow-hidden pb-8">
+                
+                <Link
+                  to="/team"
+                  className="link link-primary"
+                  style={{ marginLeft: "10px" }}
+                >
+                  <button className="btn btn-accent btn-outline">Your Team</button>
+                </Link>
+              </div>
+              
+            )}
+             {authUser && !authUser.isHost && (
+              <div className="flex h-full rounded-lg overflow-hidden pb-8">
+                
+                <Link
+                  to="http://localhost:5173/ticket"
+                  className="link link-primary"
+                  style={{ marginLeft: "10px" }}
+                >
+                  <button className="btn btn-accent btn-outline">Download Ticket</button>
                 </Link>
               </div>
               
