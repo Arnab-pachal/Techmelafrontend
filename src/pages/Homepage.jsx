@@ -1,7 +1,5 @@
 import { useChatStore } from "../store/useChatStore";
-import Sidebar from "../components/SideBar";
 import NoChatSelected from "../components/NoChatSelected";
-import ChatContainer from "../components/ChatContainer";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
@@ -42,8 +40,20 @@ const HomePage = () => {
                 Login and Go Profile Section For Showing Shortlisted Teams .In Home Page press register button and register at UNSTOP.
                 After Shortlisting the Team will be finalised .
               
-                <b style={{marginTop:'15px'}}>For More Informations Refer to Announcement And Messaging Section or Contact :- +9187858229</b>
+                <b style={{marginTop:'15px'}}>For More Informations Refer to Announcement And Messaging Section or Contact :- +91-6289378053</b>
             </div>
+            <div className="flex flex-col h-full p-4" style={{justifyContent:"center",alignItems:'center',marginBottom:'20px'}}>
+              <h2 className="text-2xl pb-8 font-bold" style={{textAlign:'center'}}>Register For Techmela 2025</h2>
+              <Link
+                  to="https://unstop.com/o/lfdoHxu?lb=XintJFK"
+                  className="link link-primary"
+                >
+                  <button className="btn btn-accent btn-outline">
+                    Register Here
+                  </button>
+                </Link>       
+            </div>
+       
        
             <div className="flex flex-col h-full p-4" style={{justifyContent:"center",alignItems:'center'}}>
               <h2 className="text-2xl pb-8 font-bold">TechMela 2024</h2>
@@ -53,16 +63,7 @@ const HomePage = () => {
               <h2 className="text-2xl pb-8 font-bold">Conjecture 2024</h2>
               <img src="https://res.cloudinary.com/dfdvyif4v/image/upload/v1735380815/conjecture_bonrgx.jpg" style={{height:'200px',width:'400px'}}></img>
               </div>
-              <div className="flex flex-col h-full p-4" style={{justifyContent:"center",alignItems:'center'}}>
-              <Link
-                  to="https://unstop.com/internships/full-stack-developer-internship-extion-infotech-1146627"
-                  className="link link-primary"
-                >
-                  <button className="btn btn-accent btn-outline">
-                    Register Here
-                  </button>
-                </Link>
-              </div>
+             
               
           </div>
         </div>

@@ -3,7 +3,7 @@ import { axiosInstance } from "../lib/axios"
 import io from "socket.io-client"
 
 
-const url = "https://techmelabackend.onrender.com"
+const url = "http://localhost:3000"
 export const useauthStore=create((set,get)=>({
     authUser:null,
     isSigningUp:false,

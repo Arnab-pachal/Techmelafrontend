@@ -6,8 +6,7 @@ import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare,User } from "lucide-rea
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-    const [inputValue, setInputValue] = useState("");
+
     const navigate =  useNavigate();
   
   const [formData, setFormData] = useState({
@@ -102,15 +101,7 @@ const LoginPage = () => {
               )}
             </button>
           </form>
-
-          <div className="text-center">
-            <p className="text-base-content/60">
-              Don&apos;t have an account?{" "}
-              <Link to="/signup" className="link link-primary">
-                Create account
-              </Link>
-            </p>
-          </div>
+        
           
           <div className="text-center">
       

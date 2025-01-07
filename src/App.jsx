@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Routes,Route,BrowserRouter, Navigate } from 'react-router-dom'
+
+import Ticket from "./pages/ticket.jsx"
 import Navbar from './components/Navbar'
 import Homepage from './pages/Homepage'
 import Signup from './pages/Signup'
 import Loginpage from './pages/Login'
 import Setting from './pages/Setting'
 import Profile from './pages/Profile'
+
 import Announcement from "./components/Announcement.jsx"
 import { useauthStore } from './store/useAuthStore.js'
 import { useThemeStore } from './store/useThemeStore.js'
@@ -44,6 +47,7 @@ function App() {
               <Route path='/msgview' element={authUser?<Messageview/>:<Navigate to='/login'/>}/>
               <Route path='/team' element={authUser?<Team/>:<Navigate to='/login'/>}/>
               <Route path='/prompt' element={<CustomPrompt/>}/>
+              <Route path='/ticket' element={authUser?<Ticket/>:<Navigate to='/login'/>}/>
               
             </Routes>
      

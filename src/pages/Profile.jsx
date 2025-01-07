@@ -48,7 +48,22 @@ const ProfilePage = () => {
                   <button className="btn btn-accent btn-outline">All Team</button>
                 </Link>
               </div>
+              
             )}
+             {authUser && (
+              <div className="flex h-full rounded-lg overflow-hidden pb-8">
+                
+                <Link
+                  to="http://localhost:5173/ticket"
+                  className="link link-primary"
+                  style={{ marginLeft: "10px" }}
+                >
+                  <button className="btn btn-accent btn-outline">Generate Ticket</button>
+                </Link>
+              </div>
+              
+            )}
+              
               
           
               

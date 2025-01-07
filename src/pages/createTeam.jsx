@@ -6,7 +6,7 @@ import Team from "./Team";
 
 const CreateTeam = () => {
   const { createTeam, team, visibleupdate, setvisibleupdate, updateTeam, 
-    deleteTeam, getallTeam ,isUpdateppt,pptSubmission} = useTeam();
+    deleteTeam, getallTeam ,isUpdateppt} = useTeam();
   const {authUser}=useauthStore();
   const [selectedppt, setSelectedppt] = useState(null);
   const [formdata, setFormdata] = useState({
@@ -39,7 +39,7 @@ const CreateTeam = () => {
       participants: Array(teamStrength).fill(""),
     }));
   };
-  const handleParticipantChange1 = (index, value) => {
+  const handleParticipantChange1 = (inex, value) => {
     setForm((prevData) => {
       const updatedParticipants = [...prevData.participants];
       updatedParticipants[index] = value;
@@ -108,21 +108,7 @@ const CreateTeam = () => {
     getallTeam(); // Refresh the list
   };
 
-  const handlePPTUpload = async (e,_id) => {
-    const file = e.target.files[0];
-    if (!file) return;
-   console.log("id is :- ",_id)
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
 
-    reader.onload = async () => {
-      const base64ppt = reader.result;
-      console.log(base64ppt);
-      setSelectedppt(base64ppt);
-      await pptSubmission(_id,{ppt :base64ppt});
-    };
-    
-  };
 
   let absent=()=>{
     setvisibleupdate("");
@@ -299,24 +285,7 @@ const CreateTeam = () => {
             />
           </div>
         </div>
-        
-        <div className="form-control">
-        <label>
-          <span>Upload PPT</span>
-        </label>
-        <input
-                  type="file"
-                  id="avatar-upload"
-                  accept=".pdf"
-                  onChange={(e)=>{handlePPTUpload(e,t._id)}}
-                  disabled={isUpdateppt}
-                />
-            <p className="text-sm text-zinc-400">
-              {isUpdateppt ? "UploadingPDF..." : "Click the camera icon to update your photo"}
-            </p>
-        </div>
-        
-      
+                  
                 <button type="submit" className="btn btn-primary w-full" disabled={update}>
                   {update ? "Updating..." : "Update Team Info"}
                 </button>

@@ -1,6 +1,6 @@
 import axios from "axios"
 export const axiosInstance =axios.create({
-    baseURL:'https://techmelabackend.onrender.com',
+    baseURL:'http://localhost:3000',
     withCredentials:true,
     
 })

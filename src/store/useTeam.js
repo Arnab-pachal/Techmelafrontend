@@ -7,6 +7,7 @@ export const useTeam=create((set,get)=>({
     teamParticipants:{},
     team:[],
     visibleupdate:[],
+    
     setvisibleupdate: async (_id) => {
       const { visibleupdate } = get();
      if(_id==""){set({visibleupdate:[]})}
@@ -78,13 +79,12 @@ export const useTeam=create((set,get)=>({
          console.log(e);
       }
     },
-    pptSubmission: async(teamid,teamInfo)=>{
+    TicketSubmission: async(name,teamInfo)=>{
       const {isUpdateppt}=get();
       set({isUpdateppt:true})
       try{
      
-     const {team}=get();
-     const res = await axiosInstance.post(`/team/pptsubmission/${teamid}`,teamInfo);
+     const res = await axiosInstance.post(`/team/pptsubmission/${name}`,teamInfo);
      console.log(res.data)
      set({team:[...res.data]});
      set({currentTeam:res.data});
