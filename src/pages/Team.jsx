@@ -113,26 +113,7 @@ const Team = ({ t }) => {
           </p>
         </div>
 
-        {/* PPT Section */}
-        <div className="flex justify-between items-center mt-4">
-          <span style={{ fontWeight: "bold" }}>Submitted PPT:</span>
-          {t.ppt?.length > 0 ? (
-            <a href={t.ppt} className="download-btn">
-              <img
-                src="https://res.cloudinary.com/dfdvyif4v/image/upload/v1735293931/download_logo_uue8qn.jpg"
-                alt="Download PPT"
-                style={{
-                  height: "40px",
-                  width: "100px",
-                  cursor: "pointer",
-                  borderRadius: "5px",
-                }}
-              />
-            </a>
-          ) : (
-            <span style={{ color: "#9ca3af" }}>No PPT Uploaded Till Now</span>
-          )}
-        </div>
+     
       </div>
     </div>
   );

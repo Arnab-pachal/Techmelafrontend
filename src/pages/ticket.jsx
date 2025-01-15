@@ -3,11 +3,11 @@ import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import QRCode from "qrcode";
 import {useTeam} from "../store/useTeam"
 
-const TicketGenerator = () => {
+const TicketGenerator = ({teamname="Dominator",name="subham"}) => {
   const {TicketSubmission}=useTeam();
   const [ticketDetails, setTicketDetails] = useState({
-    name:"",
-    teamName: "",
+    name:name,
+    teamName:teamname,
     time: "",
     ticketName: "",
     bookingDate: new Date().toLocaleDateString(),
@@ -129,7 +129,7 @@ const TicketGenerator = () => {
       reader.onload = async () => {
         const base64Pdf = reader.result; // Base64 string of the PDF
         try {
-          const response = await TicketSubmission(ticketDetails.teamName, { pdf: base64Pdf });
+          const response = await TicketSubmission({teamName :ticketDetails.teamName,name:[ticketDetails.name], pdf: base64Pdf });
           alert("Ticket uploaded successfully!");
         } catch (error) {
           console.error("Error uploading PDF:", error);
@@ -152,7 +152,7 @@ const TicketGenerator = () => {
     <div style={{ textAlign: "center", padding: "20px" }}>
       <h1>Event Ticket Generator</h1>
       <div style={formStyle}>
-        {["teamName", "ticketName", "time"].map((field) => (
+        {["ticketName", "time"].map((field) => (
           <label key={field}>
             {field.charAt(0).toUpperCase() + field.slice(1)}:
             <input
@@ -171,33 +171,7 @@ const TicketGenerator = () => {
 
       {showTicket && (
         <div>
-          <div id="ticket-preview" style={ticketStyle}>
-            <p>
-              <strong>Booking Date:</strong> {ticketDetails.bookingDate}
-            </p>
-            <p>
-              <strong>Booking ID:</strong> {ticketDetails.bookingID}
-            </p>
-            <h3>Attendee Details</h3>
-            <p>{ticketDetails.teamName}</p>
-         
-            <p>
-              <strong>Event Name:</strong> TECHMELA-2025
-            </p>
-            <p>
-              <strong>Event Date:</strong> January 20
-            </p>
-            <p>
-              <strong>Location:</strong>{" "}
-              <a
-                href={`https://maps.app.goo.gl/L9LU27HBvFyMs9mSA`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-              NIT DURGAPUR,OVALS
-              </a>
-            </p>
-          </div>
+          
           <button
             onClick={handleDownloadPDF}
             style={{ ...buttonStyle, marginTop: "10px" }}

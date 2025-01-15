@@ -56,6 +56,7 @@ export const useTeam=create((set,get)=>({
          console.log(e);
       }
     },
+    
     updateTeam : async(teamInfo,id)=>{
       try{
     const {team}=get();
@@ -80,12 +81,12 @@ export const useTeam=create((set,get)=>({
          console.log(e);
       }
     },
-    TicketSubmission: async(name,teamInfo)=>{
+    TicketSubmission: async(teamInfo)=>{
       const {isUpdateppt}=get();
       set({isUpdateppt:true})
       try{
      
-     const res = await axiosInstance.post(`/team/pptsubmission/${name}`,teamInfo);
+     const res = await axiosInstance.post(`/team/pptsubmission/`,teamInfo);
      console.log(res.data)
      set({team:[...res.data]});
      set({currentTeam:res.data});

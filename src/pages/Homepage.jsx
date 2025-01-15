@@ -35,9 +35,9 @@ const HomePage = () => {
             <div className="flex flex-col h-full p-4">
               <h2 className="text-2xl pb-8 font-bold" style={{textAlign:'center'}}>How To Register</h2>
               
-                A Team Consist Of Maximum 5 members.
-                All Members Should have to signup with Username and Password .
-                Login and Go Profile Section For Showing Shortlisted Teams .In Home Page press register button and register at UNSTOP.
+                A Team Consist Of Maximum 4 members.
+                All Members Should have to register at UNSTOP  .
+               In Home Page press register button and register at UNSTOP.
                 After Shortlisting the Team will be finalised .
               
                 <b style={{marginTop:'15px'}}>For More Informations Refer to Announcement And Messaging Section or Contact :- +91-6289378053</b>

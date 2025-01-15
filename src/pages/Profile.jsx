@@ -50,20 +50,8 @@ const ProfilePage = () => {
               </div>
               
             )}
-            {authUser && authUser.isHost && (
-              <div className="flex h-full rounded-lg overflow-hidden pb-8">
-                
-                <Link
-                  to="http://localhost:5173/ticket"
-                  className="link link-primary"
-                  style={{ marginLeft: "10px" }}
-                >
-                  <button className="btn btn-accent btn-outline">Generate Ticket</button>
-                </Link>
-              </div>
-              
-            )}
-             {authUser && !authUser.isHost && (
+            
+             {authUser && !authUser.isHost && authUser.TeamName!=''&& (
               <div className="flex h-full rounded-lg overflow-hidden pb-8">
                 
                 <Link
@@ -76,19 +64,28 @@ const ProfilePage = () => {
               </div>
               
             )}
-             {authUser && !authUser.isHost && (
-              <div className="flex h-full rounded-lg overflow-hidden pb-8">
-                
-                <Link
-                  to="http://localhost:5173/ticket"
-                  className="link link-primary"
-                  style={{ marginLeft: "10px" }}
-                >
-                  <button className="btn btn-accent btn-outline">Download Ticket</button>
-                </Link>
-              </div>
-              
-            )}
+          {authUser && !authUser.isHost && authUser.generatedToken!='' && (
+ 
+  <div className="flex h-full rounded-lg overflow-hidden pb-8">
+    <button
+      className="btn btn-accent btn-outline"
+      style={{ marginLeft: "10px" }}
+      onClick={() => {
+        const ticketUrl = authUser.generatedToken; // Replace with your dynamic ticket URL
+        const link = document.createElement("a");
+        link.href = ticketUrl;
+        link.download = "Your_Ticket.pdf"; // Set the file name for the download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }}
+    >
+      Download Ticket
+    </button>
+  </div>)
+}
+
+
               
               
           

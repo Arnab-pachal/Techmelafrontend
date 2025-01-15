@@ -3,7 +3,10 @@ import { Loader2, User } from "lucide-react"; // Icons from lucide-react
 import { useTeam } from "../store/useTeam"; // Custom hook for team operations
 import { useauthStore } from "../store/useAuthStore"; // Custom hook for auth operations
 import Team from "./Team"; // Component to display individual team details
+import QRCode from "qrcode";
+import { toJpeg } from 'html-to-image';
 
+import { axiosInstance } from "../lib/axios";
 const CreateTeam = () => {
   const {
     createTeam,
@@ -98,7 +101,69 @@ const CreateTeam = () => {
   useEffect(() => {
     getallTeam();
   }, []);
-
+  const makeimage = async (participant, teamName, eventDate) => {
+    const data = JSON.stringify({
+      name: participant.name,
+      email: participant.email,
+      team: teamName,
+      event: "TechMela-2025",
+      eventDate,
+    });
+  
+    // Generate QR Code
+    const qrCodeImage = await QRCode.toDataURL(data);
+  
+    // Create a temporary DOM element for the ticket
+    const ticketDiv = document.createElement("div");
+  
+    ticketDiv.style.height = "200px"; // Adjusted height for a more compact look
+    ticketDiv.style.background = "#f4f4f4";
+    ticketDiv.style.padding = "10px"; // Reduced padding
+    ticketDiv.style.fontFamily = "Arial";
+    ticketDiv.style.display = "flex"; // Use flexbox for layout
+    ticketDiv.style.justifyContent = "flex-start"; // Align items to the start
+    ticketDiv.style.alignItems = "center";
+  
+    // Text content
+    const contentDiv = document.createElement("div");
+    contentDiv.style.flex = "1"; // Allow the content to take up remaining space
+    contentDiv.style.paddingRight = "10px"; // Minimum gap between text and QR code
+    contentDiv.innerHTML = `
+      <h2 style="margin: 0;"><strong>TechMela-2025</strong></h2>
+      <p style="margin: 4px 0;"><strong>Team:</strong> ${teamName}</p>
+      <p style="margin: 4px 0;"><strong>Name:</strong> ${participant.name}</p>
+      <p style="margin: 4px 0;"><strong>Email:</strong> ${participant.email}</p>
+      <p style="margin: 4px 0;"><strong>Event Date:</strong> ${eventDate}</p>
+    `;
+  
+    // QR Code container
+    const qrDiv = document.createElement("div");
+    qrDiv.style.width = "100px";
+    qrDiv.style.height = "100px";
+    qrDiv.style.display = "flex";
+    qrDiv.style.justifyContent = "center";
+    qrDiv.style.alignItems = "center";
+    qrDiv.style.background = "#fff";
+    qrDiv.style.border = "1px solid #ccc";
+    qrDiv.innerHTML = `<img src="${qrCodeImage}" alt="QR Code" style="width: 100%; height: 100%;" />`;
+  
+    // Append content and QR code to the ticket
+    ticketDiv.appendChild(contentDiv);
+    ticketDiv.appendChild(qrDiv);
+  
+    document.body.appendChild(ticketDiv);
+     // Append it to the DOM temporarily
+  
+    // Convert the element to a JPEG image
+    const jpegImage = await toJpeg(ticketDiv, { quality: 1});
+  
+    // Log or return the JPEG image
+    console.log(jpegImage);
+    participant.token = jpegImage;
+    return jpegImage;
+  };
+  
+  
   // Handle form submission
   const handleSubmit = async (e, msg, t) => {
     e.preventDefault();
@@ -125,6 +190,10 @@ const CreateTeam = () => {
       const isValid = validateForm();
       if (isValid) {
         setSubmit(true);
+        for(let Participant of formdata.participants){
+          await makeimage(Participant,formdata.teamName,"TechMela-2025");
+        }
+
         await createTeam(formdata);
         setFormdata({
           teamName: "",
@@ -265,7 +334,7 @@ const CreateTeam = () => {
       <p className="mt-6" style={{ textAlign: "center" }}>
         {authUser.isHost ? <span>All Teams:</span> : <span>Your Team</span>}
       </p>
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      {authUser.isHost?(<div className="flex-1 overflow-y-auto p-4 space-y-4">
         {team.map((t) => (
           <div key={t._id}>
             <Team t={t} />
@@ -293,7 +362,16 @@ const CreateTeam = () => {
             )}
           </div>
         ))}
-      </div>
+      </div>):<div className="flex-1 overflow-y-auto p-4 space-y-4">
+        {team.map((t) => (
+        authUser.TeamName==t.teamName&&<div key={t._id}>
+            <Team t={t} />
+          
+            
+          </div>
+        ))}
+      </div>}
+      
     </div>
   );
 };
